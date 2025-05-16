@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    container_name: hn_jobs_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: hnuser
+      POSTGRES_PASSWORD: hnpass
+      POSTGRES_DB: hnjobs
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  metabase:
+    image: metabase/metabase:latest
+    container_name: hn_jobs_metabase
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: hnjobs
+      MB_DB_PORT: 5432
+      MB_DB_USER: hnuser
+      MB_DB_PASS: hnpass
+      MB_DB_HOST: db
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
