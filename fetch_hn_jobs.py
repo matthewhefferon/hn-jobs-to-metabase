@@ -188,5 +188,5 @@ def print_first_job_comments(thread_id, n=None, insert=False):
 if __name__ == "__main__":
     thread_id = MANUAL_THREAD_ID
     if thread_id:
-        print_first_job_comments(thread_id, n=25, insert=True)
+        print_first_job_comments(thread_id, insert=True)
         export_jobs_to_csv(pgconn)
