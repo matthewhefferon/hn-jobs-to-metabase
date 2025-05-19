@@ -52,15 +52,4 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER update_jobs_updated_at
   BEFORE UPDATE ON hn.jobs
   FOR EACH ROW
-  EXECUTE FUNCTION hn.update_updated_at_column();
-
--- Add keywords column for filtering (idempotent)
-DO $$ BEGIN
-    IF NOT EXISTS (
-        SELECT 1 FROM information_schema.columns 
-        WHERE table_schema='hn' AND table_name='jobs' AND column_name='keywords'
-    ) THEN
-        ALTER TABLE hn.jobs ADD COLUMN keywords text[];
-        COMMENT ON COLUMN hn.jobs.keywords IS 'Extracted keywords from title and description for filtering/search.';
-    END IF;
-END $$; 
+  EXECUTE FUNCTION hn.update_updated_at_column(); 
