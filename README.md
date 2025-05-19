@@ -2,6 +2,12 @@
 
 Fetches job postings from "Who is hiring?" threads on Hacker News, parses them with OpenAI, and stores them in Postgres for Metabase dashboards. Also exports to CSV.
 
+## Prerequisites
+
+- Docker and Docker Compose installed and running
+- Python 3.9+
+- OpenAI API key
+
 ## Quickstart
 
 1. **Clone:**
@@ -30,7 +36,7 @@ Fetches job postings from "Who is hiring?" threads on Hacker News, parses them w
    docker compose down
    ```
 
-**After running, you'll get a `hn_jobs.csv` file with all jobs.**
+**You'll also get a `hn_jobs.csv` file.**
 
 ---
 
